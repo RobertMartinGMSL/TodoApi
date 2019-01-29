@@ -31,12 +31,15 @@
         [HttpGet]
         public ActionResult<List<TodoItem>> GetAll()
         {
+            // default action
+            // returns the list of ToDoItems
             return _context.TodoItems.ToList();
         }
 
         [HttpGet("{id}", Name = "GetTodo")]
         public ActionResult<TodoItem> GetById(long id)
         {
+            // returns specific ToDoItem
             var item = _context.TodoItems.Find(id);
             if (item == null)
             {
@@ -48,40 +51,50 @@
         [HttpPost]
         public IActionResult Create(TodoItem item)
         {
+            // creates ToDoItem
             _context.TodoItems.Add(item);
             _context.SaveChanges();
 
+            // returns ToDoItem that was created
             return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(long id, TodoItem item)
         {
+            //finds existing ToDoItem by id
             var todo = _context.TodoItems.Find(id);
             if (todo == null)
             {
                 return NotFound();
             }
 
+            // updates that item with your PUT request body variables
             todo.IsComplete = item.IsComplete;
             todo.Name = item.Name;
 
             _context.TodoItems.Update(todo);
             _context.SaveChanges();
+
+            // returns nothing as no return specified (like a void)
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
+            //finds existing ToDoItem by id
             var todo = _context.TodoItems.Find(id);
             if (todo == null)
             {
                 return NotFound();
             }
 
+            // removes the item 
             _context.TodoItems.Remove(todo);
             _context.SaveChanges();
+
+            // returns nothing as no return specified (like a void)
             return NoContent();
         }
     }
