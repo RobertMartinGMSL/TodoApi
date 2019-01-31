@@ -24,10 +24,12 @@
                 // Create a new TodoItem if collection is empty,
                 // which means you can't delete all TodoItems.
                 _context.TodoItems.Add(new TodoItem { Name = "Item1" });
+                _context.TodoItems.Add(new TodoItem { Name = "Item2" });
                 _context.SaveChanges();
             }
         }
 
+        /* GET || /api/todo */
         [HttpGet]
         public ActionResult<List<TodoItem>> GetAll()
         {
@@ -36,6 +38,7 @@
             return _context.TodoItems.ToList();
         }
 
+        /* GET || /api/todo/3 */
         [HttpGet("{id}", Name = "GetTodo")]
         public ActionResult<TodoItem> GetById(long id)
         {
@@ -48,6 +51,7 @@
             return item;
         }
 
+        /* POST || /api/todo/ */
         [HttpPost]
         public IActionResult Create(TodoItem item)
         {
@@ -59,6 +63,8 @@
             return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
         }
 
+
+        /* PUT || /api/todo/3 */
         [HttpPut("{id}")]
         public IActionResult Update(long id, TodoItem item)
         {
@@ -80,6 +86,7 @@
             return NoContent();
         }
 
+        /* DELETE || /api/todo/3 */
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
