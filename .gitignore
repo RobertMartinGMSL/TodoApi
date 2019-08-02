@@ -4,3 +4,7 @@ TodoApi/obj/Debug/netcoreapp2.1/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f
 TodoApi/obj/Debug/
 TodoApi/obj/
 .vs/
+
+ToDoIntegrationTests/bin/Debug/*
+
+ToDoIntegrationTests/obj/Debug/*
